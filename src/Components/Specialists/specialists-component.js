@@ -1,10 +1,11 @@
 import React from 'react';
+import Scoreboard from '../Scoreboard/scoreboard-component';
 
 class Specialists extends React.Component {
     render(){
-        return(
+        return(           
             <div>
-                <button>labas as krabas</button>
+                <Scoreboard  Items = {this.props.Items}  Spec = {true} deleteItem = {this.props.deleteItem}></Scoreboard>
             </div>
         );
     }

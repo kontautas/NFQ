@@ -1,43 +1,41 @@
 import React from 'react';
-import data from '../Administrator/client-list-example';
-
+import App from '../../App';
 
 class Scoreboard extends React.Component {
+    
     constructor(){
         super();
         this.state = {
-            items: [],
-            isLoaded: false
-        }  
-    }
-    async componentDidMount(){
-        let response = await data;
-        response = JSON.parse(response);
-        this.setState({items: response.clients, isLoaded: true});
-        console.log()
-    }
-    render(){
-        if(!this.state.isLoaded){
-            console.log('loading');
-            return(<div>loading....</div>);
-            
+            number: 0
         }
-        else
-        {
-            console.log(this.state.items);
+    }
+    render(){       
             return(
-                <div>
-                    <ul>
-                        {this.state.items.map(el => (
-                            <li key = {el.Number}>
-                                {el.SpecialistName}: {el.Number}
-                            </li>
+                <div>                    
+                    <ol>
+                        {this.props.Items.sort(function(a,b){return a.SpecialistName > b.SpecialistName ? 
+                            1 : (a.SpecialistName === b.SpecialistName) ? (a.Number - b.Number): -1})
+                            .map(el => (
+                            <div key = {el.Number}>
+                                {el.SpecialistName}: {el.Number} {this.props.Spec === true ? <button onClick = {() => this.props.deleteItem(el.SpecialistName, el.Number)}>Aptarnauta</button> : null}
+                            </div>
                         ))}
-                    </ul>
+                    </ol>
                 </div>
+
             );
         }
-    }
 }
+//deleteItem(el.SpecialistName, el.Number)
+/* <ol>
+{this.props.Items.sort(function(a,b){return a.SpecialistName > b.SpecialistName ? 
+    1 : (a.SpecialistName === b.SpecialistName) ? (a.Number - b.Number): -1})
+    .map(el => (
+    <div key = {el.Number}>
+        {el.SpecialistName}: {el.Number} {this.props.Spec === true ? <button>Aptarnauta</button> : null}
+    </div>
+))}
+</ol>
+*/
 
 export default Scoreboard;

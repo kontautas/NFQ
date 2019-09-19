@@ -9,7 +9,7 @@ let clients = {
         {"SpecialistName":"Alysa", "Number":"111"},
         {"SpecialistName":"George", "Number":"145"},
         {"SpecialistName":"Antony", "Number":"177"},
-        {"SpecialistName":"Tom", "Number":"198"}
+        {"SpecialistName":"Tom", "Number":"198"}      
     ]
 }
 clients = JSON.stringify(clients);
