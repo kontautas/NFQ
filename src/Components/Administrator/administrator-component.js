@@ -17,6 +17,9 @@ class admin extends React.Component{
     saveToLocal = () => {
         localStorage.setItem('data', Clients);
     }
+    saveToLocalCurrentData = () => {
+        localStorage.setItem('CurrentData', this.props.items);
+    }
     handleChange(event) {
         this.setState({SpecialistName: event.target.value});
     }
@@ -44,7 +47,8 @@ class admin extends React.Component{
                 <input type="submit" value="Submit" />
               </form>
             </div>
-                <button onClick = {this.saveToLocal}>Saugoti i local storage</button>
+                <button onClick = {this.saveToLocal}>Saugoti pradinius duom</button>
+                <button onClick = {this.saveToLocalCurrentData}>Saugoti esama data</button>
                 <Scoreboard Items = {this.props.Items}/>                
             </div>
         );  

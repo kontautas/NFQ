@@ -55,9 +55,8 @@ class App extends React.Component {
     }
   }
   componentDidUpdate(){
-    const zzz = JSON.stringify(this.state.items);
-    localStorage.setItem('state', zzz);
-    console.log('bye');
+    const data = JSON.stringify(this.state.items);
+    localStorage.setItem('state', data);
   }
   /*async componentDidMount(){
     let response = await data;

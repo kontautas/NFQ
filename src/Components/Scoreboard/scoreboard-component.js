@@ -13,7 +13,18 @@ class Scoreboard extends React.Component {
             return(
                 <div>                    
                     <ol>
-                        {this.props.Items.sort(function(a,b){return a.SpecialistName > b.SpecialistName ? 
+                        {
+                            this.props.specOnly ? this.props.Items.sort(function(a,b){return a.SpecialistName > b.SpecialistName ? 
+                                1 : (a.SpecialistName === b.SpecialistName) ? (a.Number - b.Number): -1}).map(el => (
+                               el.SpecialistName === this.props.specOnly  ? 
+                               <div key = {el.Number}>
+                                {el.SpecialistName}: {el.Number} {this.props.Spec === true ? <button onClick = {() => this.props.deleteItem(el.SpecialistName, el.Number)}>Aptarnauta</button> : null}
+                               </div>
+                               :
+                               null 
+                            )) 
+                            :
+                            this.props.Items.sort(function(a,b){return a.SpecialistName > b.SpecialistName ? 
                             1 : (a.SpecialistName === b.SpecialistName) ? (a.Number - b.Number): -1})
                             .map(el => (
                             <div key = {el.Number}>
