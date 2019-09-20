@@ -7,7 +7,7 @@ class admin extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            SpecialistName: '',
+            SpecialistName: '-----',
             Number: 0
         }
         this.handleChange = this.handleChange.bind(this);
@@ -30,13 +30,13 @@ class admin extends React.Component{
         return (
             <div>
                 <div>
-                <form onSubmit={()=> this.props.addNewClient(this.state.SpecialistName, this.state.Number)}>                    
+                <form onSubmit={this.state.SpecialistName !== '-----' ? ()=> this.props.addNewClient(this.state.SpecialistName, this.state.Number) : null}>                    
                     <label>
                         Pick specialist:
                         <select value={this.state.SpecialistName} onChange={this.handleChange}>
-                            <option>-----</option>
+                            <option key = {0}>-----</option>
                             {JSON.parse(Clients).clients.map(element =>
-                                <option value = {element.SpecialistName}>{element.SpecialistName}</option>                    
+                                <option key = {element.Number} value = {element.SpecialistName}>{element.SpecialistName}</option>                    
                             )}
                         </select>
                     </label>
@@ -49,6 +49,7 @@ class admin extends React.Component{
             </div>
                 <button onClick = {this.saveToLocal}>Saugoti pradinius duom</button>
                 <button onClick = {this.saveToLocalCurrentData}>Saugoti esama data</button>
+                <button onClick = {this.props.loadExampleData}>uzkrauti ex</button>
                 <Scoreboard Items = {this.props.Items}/>                
             </div>
         );  

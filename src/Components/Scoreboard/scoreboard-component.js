@@ -1,5 +1,5 @@
 import React from 'react';
-import App from '../../App';
+import Element from '../Scoreboard-element/scoreboard-element-component';
 
 class Scoreboard extends React.Component {
     
@@ -11,42 +11,11 @@ class Scoreboard extends React.Component {
     }
     render(){       
             return(
-                <div>                    
-                    <ol>
-                        {
-                            this.props.specOnly ? this.props.Items.sort(function(a,b){return a.SpecialistName > b.SpecialistName ? 
-                                1 : (a.SpecialistName === b.SpecialistName) ? (a.Number - b.Number): -1}).map(el => (
-                               el.SpecialistName === this.props.specOnly  ? 
-                               <div key = {el.Number}>
-                                {el.SpecialistName}: {el.Number} {this.props.Spec === true ? <button onClick = {() => this.props.deleteItem(el.SpecialistName, el.Number)}>Aptarnauta</button> : null}
-                               </div>
-                               :
-                               null 
-                            )) 
-                            :
-                            this.props.Items.sort(function(a,b){return a.SpecialistName > b.SpecialistName ? 
-                            1 : (a.SpecialistName === b.SpecialistName) ? (a.Number - b.Number): -1})
-                            .map(el => (
-                            <div key = {el.Number}>
-                                {el.SpecialistName}: {el.Number} {this.props.Spec === true ? <button onClick = {() => this.props.deleteItem(el.SpecialistName, el.Number)}>Aptarnauta</button> : null}
-                            </div>
-                        ))}
-                    </ol>
+                <div>                                          
+                    <Element Items = {this.props.Items} specOnly = {this.props.specOnly}/>  
                 </div>
-
             );
         }
 }
-//deleteItem(el.SpecialistName, el.Number)
-/* <ol>
-{this.props.Items.sort(function(a,b){return a.SpecialistName > b.SpecialistName ? 
-    1 : (a.SpecialistName === b.SpecialistName) ? (a.Number - b.Number): -1})
-    .map(el => (
-    <div key = {el.Number}>
-        {el.SpecialistName}: {el.Number} {this.props.Spec === true ? <button>Aptarnauta</button> : null}
-    </div>
-))}
-</ol>
-*/
 
 export default Scoreboard;

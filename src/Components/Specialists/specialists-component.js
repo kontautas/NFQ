@@ -19,13 +19,13 @@ class Specialists extends React.Component {
             <div>
                 <div>
                     <select value={this.state.currentSpec} onChange={this.handleChange}>
-                        <option>-----</option>
+                        <option key = {0}>-----</option>
                         {JSON.parse(Clients).clients.map(element =>
-                            <option value = {element.SpecialistName}>{element.SpecialistName}</option>                    
+                            <option key = {element.Number} value = {element.SpecialistName}>{element.SpecialistName}</option>                    
                         )}
                     </select>
                 </div>
-                <Scoreboard  Items = {this.props.Items}  Spec = {true} deleteItem = {this.props.deleteItem} specOnly = {this.state.currentSpec}></Scoreboard>
+                <Scoreboard  Items = {this.props.Items} deleteItem = {this.props.deleteItem} specOnly = {this.state.currentSpec}></Scoreboard>
             </div>
         );
     }
