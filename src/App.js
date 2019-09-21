@@ -12,7 +12,7 @@ class App extends React.Component {
     super();
     this.state = {
       items: [],
-      averageTime: []
+      averageTime: 0
     }
     //this.deleteItem = this.deleteItem.bind(this);
     this.addNewClient = this.addNewClient.bind(this);
@@ -20,7 +20,15 @@ class App extends React.Component {
     this.averageTimeObject = this.averageTimeObject.bind(this);
     
   }
-  
+  updateAverageTime = (specName, time) => {
+    this.state.averageTime.map(el => {
+      if(el.SpecialistName === specName){
+        el.Times = [...el.Times, time];
+        el.AverageTime = el.Times.reduce(function(a, b) { return a + b; }) / el.Times.length;
+      }
+      return el;
+    })
+  }
   /*deleteItem = (name, number) => {
     const copy = this.state.items;
     let index;
@@ -42,7 +50,7 @@ class App extends React.Component {
       return 0;
     }).map(el => {
       if(lastName !== el.SpecialistName){
-        copy.push({SpecialistName: el.SpecialistName, AverageTime: 0});
+        copy.push({SpecialistName: el.SpecialistName, Times: [], AverageTime: 0});
         lastName = el.SpecialistName;
       }
       return el;
@@ -62,12 +70,13 @@ class App extends React.Component {
         else if(!start && el.StartTime){
           el.Done = 'Aptarnautas';
           el.VisitTime = fullTime - el.StartTime;
+          this.updateAverageTime(el.SpecialistName, el.VisitTime);
+
         }       
       }
       return el;
     })
     this.setState({items: copy})
-    console.log(this.state.items);
   }
   
   addNewClient = (name, number) => {
@@ -108,9 +117,9 @@ class App extends React.Component {
     return (
       <Switch>
         <Route path = '/administrator' render = {(props) => <Admin {...props} Items = {this.state.items} addNewClient = {this.addNewClient} loadExampleData = {this.loadExampleData} averageTimeObject = {this.averageTimeObject}/>}/>
-        <Route path = '/specialists' render = {(props) => <Specialists {...props} Items = {this.state.items} customerDone = {this.customerDone} />}/>
+        <Route path = '/specialists' render = {(props) => <Specialists {...props} Items = {this.state.items} customerDone = {this.customerDone} AverageTime = {this.state.averageTime}/>}/>
         <Route path = '/scoreboard' render = {(props) => <Scoreboard {...props} Items = {this.state.items} />}/>
-        <Route path = '/client' render = {(props) => <ClientPage {...props} Items = {this.state.items}/>}/>
+        <Route path = '/client' render = {(props) => <ClientPage {...props} Items = {this.state.items} AverageTime = {this.state.averageTime}/>}/>
       </Switch>
     );
   }

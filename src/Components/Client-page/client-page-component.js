@@ -13,7 +13,6 @@ class ClientPage extends React.Component {
     }
     componentDidUpdate(){
         const number = JSON.stringify(this.state.currentNumber);
-        console.log(number);
         localStorage.setItem('number', number);
     }
     componentDidMount(){
@@ -29,7 +28,7 @@ class ClientPage extends React.Component {
                     onChange = {this.handleChange}>
                 </input>
 
-                <Scoreboard  Items = {this.props.Items} clientNumber={this.state.currentNumber}></Scoreboard>  
+                <Scoreboard  Items = {this.props.Items} clientNumber={this.state.currentNumber} AverageTime = {this.props.AverageTime}></Scoreboard>  
                 <meta httpEquiv="refresh" content="5; url=/client"></meta>
             </div>
         );

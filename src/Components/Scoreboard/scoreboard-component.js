@@ -5,13 +5,16 @@ import './scoreboard-styles.css';
 const Scoreboard = (props) => {
     let lastName = '';
     let cssClass = '';
+    let lineNumber = 1;
     const renderItem = (el) => {
         if(!el.Done){
             if(lastName !== el.SpecialistName){           
-                cssClass = 'element first';                             
+                cssClass = 'element first';
+                lineNumber = 1;                             
             }
             else {
-                cssClass = 'element';          
+                cssClass = 'element';
+                lineNumber++;          
             }
             lastName = el.SpecialistName;
             if(props.specOnly){
@@ -29,7 +32,7 @@ const Scoreboard = (props) => {
                                 cssClass === 'element first' ? 
                                 <button onClick = {()=>props.customerDone(el.Number, true)}>Pradeti Laika</button>                                            
                                 : null
-                            }                            
+                            }                                                    
                         </div>
                     ); 
                 }            
@@ -39,7 +42,15 @@ const Scoreboard = (props) => {
                     return(
                         <div className = {`${cssClass}`} key = {el.Number}>
                             <div className = 'text'>{el.SpecialistName}</div> 
-                            <div className = 'text'>{el.Number}</div>                                                   
+                            <div className = 'text'>{el.Number}</div>
+                            {
+                                props.AverageTime.map(element=> {
+                                    if(element.SpecialistName === el.SpecialistName){
+                                        return <div key = {el.Number} className = 'text'>{lineNumber * element.AverageTime}</div>
+                                    }
+                                    return null;
+                                })         
+                            }                                                    
                         </div>
                     ); 
                 }  

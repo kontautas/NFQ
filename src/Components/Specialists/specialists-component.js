@@ -25,7 +25,7 @@ class Specialists extends React.Component {
                         )}
                     </select>
                 </div>
-                <Scoreboard  Items = {this.props.Items} customerDone = {this.props.customerDone} specOnly = {this.state.currentSpec} ></Scoreboard>
+                <Scoreboard  Items = {this.props.Items} customerDone = {this.props.customerDone} specOnly = {this.state.currentSpec} AverageTime = {this.props.AverageTime}></Scoreboard>
             </div>
         );
     }
