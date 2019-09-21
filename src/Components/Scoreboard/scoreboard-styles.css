@@ -1,0 +1,26 @@
+.scoreboard {
+    margin-left: 30%;
+    margin-right: 30%;
+    border: 5px;
+    border-color: black;
+    border-style: solid;
+
+}
+.element {
+    display: flex;
+    justify-content: center;
+}
+.text {
+    text-align: left;
+    margin: 10px;
+
+}
+body {
+    overflow: hidden;
+}
+.first {
+    border-style: solid;
+    border-color: red;
+    border: 5px;
+    color:red;
+} 
