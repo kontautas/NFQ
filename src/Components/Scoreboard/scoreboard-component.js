@@ -1,20 +1,16 @@
 import React from 'react'
 import './scoreboard-styles.css';
 
-
 const Scoreboard = (props) => {
     let lastName = '';
     let cssClass = '';
-    let lineNumber = 1;
     const renderItem = (el) => {
         if(!el.Done){
             if(lastName !== el.SpecialistName){           
-                cssClass = 'element first';
-                lineNumber = 1;                             
+                cssClass = 'element first';                          
             }
             else {
-                cssClass = 'element';
-                lineNumber++;          
+                cssClass = 'element';    
             }
             lastName = el.SpecialistName;
             if(props.specOnly){
@@ -35,7 +31,8 @@ const Scoreboard = (props) => {
                             }                                                    
                         </div>
                     ); 
-                }            
+                }
+                                          
             }
             else if(props.clientNumber){
                 if(props.clientNumber === el.Number){
@@ -46,7 +43,7 @@ const Scoreboard = (props) => {
                             {
                                 props.AverageTime.map(element=> {
                                     if(element.SpecialistName === el.SpecialistName){
-                                        return <div key = {el.Number} className = 'text'>{lineNumber * element.AverageTime}</div>
+                                        return <div key = {el.Number} className = 'text'>{el.WaitTime ? el.WaitTime : 0}</div>
                                     }
                                     return null;
                                 })         
@@ -60,12 +57,19 @@ const Scoreboard = (props) => {
                     <div className = {`${cssClass}`} key = {el.Number}>
                         <div className = 'text'>{el.SpecialistName}</div> 
                         <div className = 'text'>{el.Number}</div>  
+                        {
+                            props.AverageTime.map(element=> {
+                                if(element.SpecialistName === el.SpecialistName){
+                                    return <div key = {el.Number} className = 'text'>{el.WaitTime ? el.WaitTime : 0}</div>
+                                }
+                                return null;
+                            })   
+                        }        
                     </div>
                 );
             }
         }
     }
-  
     return(   
         <div className = 'scoreboard'>
             {                       

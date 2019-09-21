@@ -50,8 +50,7 @@ class admin extends React.Component{
                 <button onClick = {this.saveToLocal}>Saugoti pradinius duom</button>
                 <button onClick = {this.saveToLocalCurrentData}>Saugoti esama data</button>
                 <button onClick = {this.props.loadExampleData}>uzkrauti ex</button>
-                <button onClick = {this.props.averageTimeObject}>pvz</button>
-                <Scoreboard Items = {this.props.Items}/>                
+                <Scoreboard Items = {this.props.Items} AverageTime = {this.props.AverageTime} />                
             </div>
         );  
     }
