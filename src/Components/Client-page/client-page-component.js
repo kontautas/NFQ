@@ -25,17 +25,26 @@ class ClientPage extends React.Component {
     
     render(){
         return(
-            <div>
-                <input 
-                    className = 'search'
-                    type = 'search' 
-                    placeholder = {this.state.currentNumber}
-                    onChange = {this.handleChange}>
-                </input>
-
-                <Scoreboard  Items = {this.props.Items} clientNumber={this.state.currentNumber}></Scoreboard>  
-                <meta httpEquiv="refresh" content="5" url="/client"></meta>
+            <div className = 'container'>
+                <div className = 'row'>
+                    <div className = 'col-sm-2'>
+                        <label>
+                            Įveskite savo skaičių
+                        </label>
+                        <input 
+                            className = 'search'
+                            type = 'search' 
+                            placeholder = {this.state.currentNumber}
+                            onChange = {this.handleChange}>
+                        </input>
+                    </div>                    
+                    <div className = 'col-sm-8'>
+                        <Scoreboard  Items = {this.props.Items} clientNumber={this.state.currentNumber}></Scoreboard>       
+                    </div>                 
+                </div> 
+                <meta httpEquiv="refresh" content="5"></meta>              
             </div>
+            
         );
     }
 }

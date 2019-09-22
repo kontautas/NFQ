@@ -16,16 +16,24 @@ class Specialists extends React.Component {
     }
     render(){
         return(           
-            <div>
-                <div>
-                    <select value={this.state.currentSpec} onChange={this.handleChange}>
-                        <option key = {0}>-----</option>
+            <div className = 'container'>
+                <div className = 'row'>
+                    <div className = 'col-sm-2'>
+                    <label>Pasirinkite specialistą</label>
+                    <div className = 'dropdown'>
+                                
+                    <select className = 'btn btn-secondary btn-sm' value={this.state.currentSpec} onChange={this.handleChange} autoFocus >
+                        <option className = 'dropdown-item changeColor' key = {0}>-----</option>
                         {JSON.parse(Clients).clients.map(element =>
-                            <option key = {element.Number} value = {element.SpecialistName}>{element.SpecialistName}</option>                    
-                        )}
+                            <option className = 'dropdown-item changeColor' key = {element.Number} value = {element.SpecialistName}>{element.SpecialistName}</option>                    
+                        )}                            
                     </select>
                 </div>
-                <Scoreboard  Items = {this.props.Items} customerDone = {this.props.customerDone} specOnly = {this.state.currentSpec}></Scoreboard>
+                    </div>
+                    <div className = 'col-sm-8'>
+                        <Scoreboard  Items = {this.props.Items} customerDone = {this.props.customerDone} specOnly = {this.state.currentSpec}></Scoreboard>
+                    </div>
+                </div>                
             </div>
         );
     }

@@ -6,6 +6,8 @@ import Specialists from './Components/Specialists/specialists-component';
 import Scoreboard from './Components/Scoreboard/scoreboard-component';
 import Clients from './Components/Administrator/client-list-example';
 import ClientPage from './Components/Client-page/client-page-component';
+import Header from './Components/Header/header-component';
+
 
 class App extends React.Component {
   constructor(){
@@ -33,12 +35,15 @@ class App extends React.Component {
             if(el.SpecialistName === ele.SpecialistName){                    
                 el.WaitTime = ele.AverageTime * lineNumber;              
             }
+            return el;
         })
+        return el;
     })
     if(copy !== this.state.items){
         this.setState({items: copy});
     }
   }
+
   updateTimeToWait = () => {
     let copy = this.state.items;
     copy.map(el => {
@@ -47,14 +52,15 @@ class App extends React.Component {
         }
         if(el.WaitTime < 0){
           el.WaitTime = 0;
-        }                     
+        }
+        return el;
+                     
     })
     if(copy !== this.state.items){
         this.setState({items: copy});
     }
-    console.log(copy);
-
   }
+
   updateAverageTime = (specName, time) => {
     this.state.averageTime.map(el => {
       if(el.SpecialistName === specName){
@@ -93,6 +99,7 @@ class App extends React.Component {
     this.setState({averageTime: copy});
     localStorage.setItem('time', JSON.stringify(copy));
   }
+
   customerDone = (number,start) =>{
     let copy = this.state.items;
     let today = new Date();
@@ -120,6 +127,7 @@ class App extends React.Component {
     this.setState({items: [...this.state.items, add]});
     alert('Užregistruota sėkmingai');
   }
+
   componentDidMount(){
     const data = localStorage.getItem('state');
     const time = localStorage.getItem('time');
@@ -135,16 +143,16 @@ class App extends React.Component {
     }
     else{
       this.setState({averageTime: JSON.parse(time)})
-    }
-    
-    
+    }      
   }
+
   componentDidUpdate(){
     const data = JSON.stringify(this.state.items);
     const time = JSON.stringify(this.state.averageTime);
     localStorage.setItem('state', data);
     localStorage.setItem('time', time);
   }
+
   loadExampleData = async() => {
     try{
       let response = await Clients;
@@ -161,12 +169,15 @@ class App extends React.Component {
  
   render(){
     return (
-      <Switch>
-        <Route path = '/administrator' render = {(props) => <Admin {...props} Items = {this.state.items} addNewClient = {this.addNewClient} loadExampleData = {this.loadExampleData} averageTimeObject = {this.averageTimeObject} AverageTime = {this.state.averageTime} Display = {this.displayAverageTimeForClient}/>}/>
-        <Route path = '/specialists' render = {(props) => <Specialists {...props} Items = {this.state.items} customerDone = {this.customerDone} AverageTime = {this.state.averageTime} />}/>
-        <Route path = '/scoreboard' render = {(props) => <Scoreboard {...props} Items = {this.state.items} AverageTime = {this.state.averageTime} />}/>
-        <Route path = '/client' render = {(props) => <ClientPage {...props} Items = {this.state.items} uploadTimesToItems = {this.uploadTimesToItems} AverageTime = {this.state.averageTime} UpdateTime = {this.updateTimeToWait} />}/>
-      </Switch>
+      <div className = 'homepage'>
+        <Header/>
+        <Switch>
+          <Route path = '/administrator' render = {(props) => <Admin {...props} Items = {this.state.items} addNewClient = {this.addNewClient} loadExampleData = {this.loadExampleData} AverageTime = {this.state.averageTime} />}/>
+          <Route path = '/specialists' render = {(props) => <Specialists {...props} Items = {this.state.items} customerDone = {this.customerDone} AverageTime = {this.state.averageTime} />}/>
+          <Route path = '/scoreboard' render = {(props) => <Scoreboard {...props} Items = {this.state.items} AverageTime = {this.state.averageTime} />}/>
+          <Route path = '/client' render = {(props) => <ClientPage {...props} Items = {this.state.items} uploadTimesToItems = {this.uploadTimesToItems} AverageTime = {this.state.averageTime} UpdateTime = {this.updateTimeToWait} />}/>
+        </Switch>
+      </div>      
     );
   }
 }

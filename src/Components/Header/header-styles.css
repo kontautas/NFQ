@@ -1,0 +1,14 @@
+.header {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 25px;
+    
+}
+.options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
