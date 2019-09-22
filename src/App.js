@@ -7,7 +7,7 @@ import Scoreboard from './Components/Scoreboard/scoreboard-component';
 import Clients from './Components/Administrator/client-list-example';
 import ClientPage from './Components/Client-page/client-page-component';
 import Header from './Components/Header/header-component';
-
+import firebase from './firebase';
 
 class App extends React.Component {
   constructor(){
@@ -16,6 +16,13 @@ class App extends React.Component {
       items: [],
       averageTime: []
     }
+  }
+  storeDataToFirebase = () => {
+    const items = JSON.parse(localStorage.getItem('state'));
+    firebase
+    .firestore()
+    .collection('items')
+    .add({items: items});
   }
   
   uploadTimesToItems = () => {
@@ -151,6 +158,7 @@ class App extends React.Component {
     const time = JSON.stringify(this.state.averageTime);
     localStorage.setItem('state', data);
     localStorage.setItem('time', time);
+    //this.storeDataToFirebase();
   }
 
   loadExampleData = async() => {
