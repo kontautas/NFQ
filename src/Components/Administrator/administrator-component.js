@@ -1,6 +1,7 @@
 import React from 'react';
 import Clients from './client-list-example';
 import Scoreboard from '../Scoreboard/scoreboard-component';
+import { Dirent } from 'fs';
 
 class admin extends React.Component{
 
@@ -50,30 +51,35 @@ class admin extends React.Component{
         return (
             <div className = 'container'>
                 <div className = 'row'>
-                    <form className = 'col-sm-2' onSubmit={() =>this.checkBeforeSubmit()}> 
-                        <div className = 'row'>
-                            <label className = 'col'>
-                                Pick specialist :                                                          
-                            </label>
-                            <div className = 'dropdown'>                               
-                                <select className = 'btn btn-secondary btn-sm' value={this.state.SpecialistName} onChange={this.ChangeCurrentSpecName} autoFocus >
-                                    <option className = 'dropdown-item changeColor' key = {0}>-----</option>
-                                    {JSON.parse(Clients).clients.map(element =>
-                                        <option className = 'dropdown-item changeColor' key = {element.Number} value = {element.SpecialistName}>{element.SpecialistName}</option>                    
-                                    )}                            
-                                </select>
-                            </div>                                                 
-                            <label className = 'col'>
-                                Pick number :                             
-                            </label>
-                            <input className = 'form-control form-control-sm' type='number' onChange = {this.ChangeCurrentNumber} ref={this.textInput}/>                           
-                            <input type="submit" value="Submit"  className = 'btn btn-primary btn-sm col pls'/>
-                        </div>                                           
+                    <div className = 'col-sm-2'>
+                        <form onSubmit={() =>this.checkBeforeSubmit()}> 
+                            <div className = 'row'>
+                                <label className = 'col'>
+                                    Pick specialist :                                                          
+                                </label>
+                                <div className = 'dropdown'>                               
+                                    <select className = 'btn btn-secondary btn-sm' value={this.state.SpecialistName} onChange={this.ChangeCurrentSpecName} autoFocus >
+                                        <option className = 'dropdown-item changeColor' key = {0}>-----</option>
+                                        {JSON.parse(Clients).clients.map(element =>
+                                            <option className = 'dropdown-item changeColor' key = {element.Number} value = {element.SpecialistName}>{element.SpecialistName}</option>                    
+                                        )}                            
+                                    </select>
+                                </div>                                                 
+                                <label className = 'col'>
+                                    Pick number :                             
+                                </label>
+                                <input className = 'form-control form-control-sm' type='number' onChange = {this.ChangeCurrentNumber} ref={this.textInput}/>                           
+                                <input type="submit" value="Submit"  className = 'btn btn-primary btn-sm col pls'/>
+                            </div>                                                               
+                        </form>
                         <button className = 'btn btn-secondary pls' onClick = {this.saveToLocalExampleData}>Saugoti pradinius duom</button>
                         <button className = 'btn btn-secondary pls' onClick = {this.saveToLocalCurrentData}>Saugoti esama data</button>
-                        <button className = 'btn btn-secondary pls' onClick = {this.props.loadExampleData}>Užkrauti pradinius duom</button>   
-                    </form>                  
-                    <Scoreboard Items = {this.props.Items} AverageTime = {this.props.AverageTime} /> 
+                        <button className = 'btn btn-secondary pls' onClick = {this.props.loadExampleData}>Užkrauti pradinius duom</button>                   
+                    </div>
+                    <div className = 'col-sm-8'>
+                        <Scoreboard Items = {this.props.Items} AverageTime = {this.props.AverageTime} />
+                    </div>                 
+                    
                 </div>    
             </div> 
         );  
