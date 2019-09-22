@@ -23,7 +23,7 @@ class admin extends React.Component{
         alert('Duomenys sėkmingai išsaugoti localstorage, key "ExampleData"');
     }
     saveToLocalCurrentData = () => {
-        localStorage.setItem('CurrentData', this.props.Items);
+        localStorage.setItem('CurrentData', JSON.stringify(this.props.Items));
         alert('Duomenys sėkmingai išsaugoti localstorage, key "CurrentData"');
     }
     ChangeCurrentSpecName = (event) => {
