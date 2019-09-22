@@ -39,7 +39,7 @@ class ClientPage extends React.Component {
                         </input>
                     </div>                    
                     <div className = 'col-sm-8'>
-                        <Scoreboard  Items = {this.props.Items} clientNumber={this.state.currentNumber}></Scoreboard>       
+                        <Scoreboard  Items = {this.props.Items} clientNumber={this.state.currentNumber} cancelVisit = {this.props.cancelVisit}></Scoreboard>       
                     </div>                 
                 </div> 
                 <meta httpEquiv="refresh" content="5"></meta>              

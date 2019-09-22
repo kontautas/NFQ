@@ -15,7 +15,7 @@ const Scoreboard = (props) => {
         }
     }
 
-    const renderScoreboardElement = (cssClass, number, specName, waitTime, renderButtons) => {       
+    const renderScoreboardElement = (cssClass, number, specName, waitTime, renderButtons, renderCancel) => {       
         return(
             <div className = {`col-sm ${cssClass}`} key = {number}>
                 <div className = 'row'>
@@ -25,6 +25,12 @@ const Scoreboard = (props) => {
                         renderButtons ?  renderButtonsElement(cssClass, number)
                         :
                         <div className = 'col-sm text'>{waitTime ? waitTime : 0} seconds</div>     
+                    }
+                    {
+                        renderCancel ? 
+                        <button className = 'btn btn-primary pls' onClick = {()=>props.cancelVisit(number)}>Cancel visit</button>
+                        :
+                        null
                     }     
                 </div>
                                                                                      
@@ -33,7 +39,8 @@ const Scoreboard = (props) => {
     }
 
     const renderItem = (el) => {
-        if(!el.Done){
+        console.log(el);
+        if(!el.Done && !el.Canceled){
             if(lastName !== el.SpecialistName){           
                 cssClass = 'first';                          
             }
@@ -67,11 +74,11 @@ const Scoreboard = (props) => {
             else if(props.clientNumber){
                 if(props.clientNumber === el.Number){
                     return(
-                        renderScoreboardElement(cssClass, el.Number, el.SpecialistName, el.WaitTime, false)
+                        renderScoreboardElement(cssClass, el.Number, el.SpecialistName, el.WaitTime, false, true)
                     ); 
                 }  
             }
-            
+
             else if(!props.specOnly && !props.clientNumber){
                 return(
                     renderScoreboardElement(cssClass, el.Number, el.SpecialistName, el.WaitTime, false)

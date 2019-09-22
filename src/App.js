@@ -17,6 +17,19 @@ class App extends React.Component {
       averageTime: []
     }
   }
+
+  clientCancels = (number) => {
+    let copy = this.state.items;
+    copy.map(el=> {
+      if(el.Number === number){
+        el.Canceled = true;
+      }
+      return el;
+    })
+    console.log(copy);
+    this.setState({items: copy});
+  }
+
   storeDataToFirebase = () => {
     const items = JSON.parse(localStorage.getItem('state'));
     firebase
@@ -183,7 +196,7 @@ class App extends React.Component {
           <Route path = '/administrator' render = {(props) => <Admin {...props} Items = {this.state.items} addNewClient = {this.addNewClient} loadExampleData = {this.loadExampleData} AverageTime = {this.state.averageTime} />}/>
           <Route path = '/specialists' render = {(props) => <Specialists {...props} Items = {this.state.items} customerDone = {this.customerDone} AverageTime = {this.state.averageTime} />}/>
           <Route path = '/scoreboard' render = {(props) => <Scoreboard {...props} Items = {this.state.items} AverageTime = {this.state.averageTime} />}/>
-          <Route path = '/client' render = {(props) => <ClientPage {...props} Items = {this.state.items} uploadTimesToItems = {this.uploadTimesToItems} AverageTime = {this.state.averageTime} UpdateTime = {this.updateTimeToWait} />}/>
+          <Route path = '/client' render = {(props) => <ClientPage {...props} Items = {this.state.items} uploadTimesToItems = {this.uploadTimesToItems} AverageTime = {this.state.averageTime} UpdateTime = {this.updateTimeToWait} cancelVisit = {this.clientCancels}/>}/>
         </Switch>
       </div>      
     );
