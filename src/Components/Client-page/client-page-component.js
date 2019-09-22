@@ -7,7 +7,6 @@ class ClientPage extends React.Component {
         this.state = {
             currentNumber: 0,
         }
-        console.log(props);
     }
 
     handleChange = (e) =>{
@@ -16,8 +15,8 @@ class ClientPage extends React.Component {
 
     componentDidUpdate(){
         const number = JSON.stringify(this.state.currentNumber);
-        localStorage.setItem('number', number);
-        setInterval(this.props.UpdateTime(), 5000);        
+        localStorage.setItem('number', number);   
+        setInterval(this.props.UpdateTime(), 5000);     
           
     }
     componentDidMount = () =>{
@@ -34,7 +33,7 @@ class ClientPage extends React.Component {
                     onChange = {this.handleChange}>
                 </input>
 
-                <Scoreboard  Items = {this.props.Items} clientNumber={this.state.currentNumber} AverageTime = {this.props.AverageTime} ></Scoreboard>  
+                <Scoreboard  Items = {this.props.Items} clientNumber={this.state.currentNumber}></Scoreboard>  
                 <meta httpEquiv="refresh" content="5" url="/client"></meta>
             </div>
         );

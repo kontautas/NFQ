@@ -4,6 +4,30 @@ import './scoreboard-styles.css';
 const Scoreboard = (props) => {
     let lastName = '';
     let cssClass = '';
+    const renderButtonsElement = (cssclass, number) =>{
+        if(cssclass === 'element first'){
+            return(
+                <div className = 'text'>
+                    <button onClick = {()=>props.customerDone(number)}>Aptarnavau</button>
+                    <button onClick = {()=>props.customerDone(number)}>Pradėti laika</button>
+                </div>
+            );
+        }
+    }
+    const renderScoreboardElement = (cssClass, number, specName, waitTime, renderButtons) => {
+        
+        return(
+            <div className = {`${cssClass}`} key = {number}>
+                <div className = 'text'>Specialist: {specName}</div> 
+                <div className = 'text'>Number: {number}</div>
+                {
+                    renderButtons ?  renderButtonsElement(cssClass, number)
+                    :
+                    <div className = 'text'>Time to wait: {waitTime ? waitTime : 0} seconds</div>     
+                }                                                                            
+            </div>
+        )
+    }
     const renderItem = (el) => {
         if(!el.Done){
             if(lastName !== el.SpecialistName){           
@@ -12,24 +36,18 @@ const Scoreboard = (props) => {
             else {
                 cssClass = 'element';    
             }
+
             lastName = el.SpecialistName;
+
             if(props.specOnly){
                 if(props.specOnly === el.SpecialistName){                   
                     return(
-                        <div className = {`${cssClass}`} key = {el.Number}>
-                            <div className = 'text'>{el.SpecialistName}</div> 
-                            <div className = 'text'>{el.Number}</div>
-                            {
-                                cssClass === 'element first' ? 
-                                <button onClick = {()=>props.customerDone(el.Number)}>Aptarnavau</button>                                           
-                                : null
-                            }
-                            {
-                                cssClass === 'element first' ? 
-                                <button onClick = {()=>props.customerDone(el.Number, true)}>Pradeti Laika</button>                                            
-                                : null
-                            }                                                    
-                        </div>
+                        renderScoreboardElement(cssClass, el.Number, el.SpecialistName, el.WaitTime, true)
+                    ); 
+                }
+                else if(props.specOnly === '-----'){
+                    return(
+                        renderScoreboardElement(cssClass, el.Number, el.SpecialistName, el.WaitTime, false)
                     ); 
                 }
                                           
@@ -37,35 +55,13 @@ const Scoreboard = (props) => {
             else if(props.clientNumber){
                 if(props.clientNumber === el.Number){
                     return(
-                        <div className = {`${cssClass}`} key = {el.Number}>
-                            <div className = 'text'>{el.SpecialistName}</div> 
-                            <div className = 'text'>{el.Number}</div>
-                            {
-                                props.AverageTime.map(element=> {
-                                    if(element.SpecialistName === el.SpecialistName){
-                                        return <div key = {el.Number} className = 'text'>{el.WaitTime ? el.WaitTime : 0}</div>
-                                    }
-                                    return null;
-                                })         
-                            }                                                    
-                        </div>
+                        renderScoreboardElement(cssClass, el.Number, el.SpecialistName, el.WaitTime, false)
                     ); 
                 }  
             }
-            else if(!props.specOnly){
+            else if(!props.specOnly && !props.clientNumber){
                 return(
-                    <div className = {`${cssClass}`} key = {el.Number}>
-                        <div className = 'text'>{el.SpecialistName}</div> 
-                        <div className = 'text'>{el.Number}</div>  
-                        {
-                            props.AverageTime.map(element=> {
-                                if(element.SpecialistName === el.SpecialistName){
-                                    return <div key = {el.Number} className = 'text'>{el.WaitTime ? el.WaitTime : 0}</div>
-                                }
-                                return null;
-                            })   
-                        }        
-                    </div>
+                    renderScoreboardElement(cssClass, el.Number, el.SpecialistName, el.WaitTime, false)
                 );
             }
         }

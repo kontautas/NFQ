@@ -43,8 +43,11 @@ class App extends React.Component {
     let copy = this.state.items;
     copy.map(el => {
         if(el.WaitTime > 0){
-          el.WaitTime = el.WaitTime - 5;
-        }             
+          el.WaitTime = Math.round(el.WaitTime - 5);
+        }
+        if(el.WaitTime < 0){
+          el.WaitTime = 0;
+        }                     
     })
     if(copy !== this.state.items){
         this.setState({items: copy});
@@ -88,7 +91,7 @@ class App extends React.Component {
       return el;
     })
     this.setState({averageTime: copy});
-    localStorage.setItem('time', copy);
+    localStorage.setItem('time', JSON.stringify(copy));
   }
   customerDone = (number,start) =>{
     let copy = this.state.items;
@@ -115,6 +118,7 @@ class App extends React.Component {
   addNewClient = (name, number) => {
     const add = {SpecialistName: name, Number: number};
     this.setState({items: [...this.state.items, add]});
+    alert('Užregistruota sėkmingai');
   }
   componentDidMount(){
     const data = localStorage.getItem('state');
@@ -133,6 +137,7 @@ class App extends React.Component {
       this.setState({averageTime: JSON.parse(time)})
     }
     
+    
   }
   componentDidUpdate(){
     const data = JSON.stringify(this.state.items);
@@ -141,11 +146,17 @@ class App extends React.Component {
     localStorage.setItem('time', time);
   }
   loadExampleData = async() => {
-    let response = await Clients;
-    response = JSON.parse(response);
-    this.setState({items: response.clients});
-    this.averageTimeObject();
-    this.uploadTimesToItems(); 
+    try{
+      let response = await Clients;
+      response = JSON.parse(response);
+      this.setState({items: response.clients});
+      this.averageTimeObject();
+      this.uploadTimesToItems(); 
+    }
+    catch{
+      alert('Nepavyko nuskaityti lankytojų duomenų')
+    }
+   
   }
  
   render(){

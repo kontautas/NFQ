@@ -9,22 +9,22 @@ class admin extends React.Component{
         this.state = {
             SpecialistName: '-----',
             Number: 0
-        }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleChange2 = this.handleChange2.bind(this);
-        
+        }        
     }    
-    saveToLocal = () => {
+    saveToLocalExampleData = () => {
         localStorage.setItem('data', Clients);
     }
     saveToLocalCurrentData = () => {
         localStorage.setItem('CurrentData', this.props.items);
     }
-    handleChange(event) {
+    ChangeCurrentSpecName = (event) => {
         this.setState({SpecialistName: event.target.value});
     }
-    handleChange2(event) {
+    ChangeCurrentNumber = (event)=> {
         this.setState({Number: event.target.value});
+    }
+    componentDidMount(){
+        this.numberInput.focus(); 
     }
     render(){
         return (
@@ -33,7 +33,7 @@ class admin extends React.Component{
                 <form onSubmit={this.state.SpecialistName !== '-----' ? ()=> this.props.addNewClient(this.state.SpecialistName, this.state.Number) : null}>                    
                     <label>
                         Pick specialist:
-                        <select value={this.state.SpecialistName} onChange={this.handleChange}>
+                        <select value={this.state.SpecialistName} onChange={this.ChangeCurrentSpecName}>
                             <option key = {0}>-----</option>
                             {JSON.parse(Clients).clients.map(element =>
                                 <option key = {element.Number} value = {element.SpecialistName}>{element.SpecialistName}</option>                    
@@ -42,16 +42,16 @@ class admin extends React.Component{
                     </label>
                     <label>
                         Pick number:
-                        <input type='number' onChange = {this.handleChange2}/>
+                        <input type='number' onChange = {this.ChangeCurrentNumber} ref={(input) => { this.numberInput = input; }}/>
                     </label>
-                <input type="submit" value="Submit" />
-              </form>
-            </div>
-                <button onClick = {this.saveToLocal}>Saugoti pradinius duom</button>
-                <button onClick = {this.saveToLocalCurrentData}>Saugoti esama data</button>
-                <button onClick = {this.props.loadExampleData}>uzkrauti ex</button>
-                <Scoreboard Items = {this.props.Items} AverageTime = {this.props.AverageTime} />                
-            </div>
+                    <input type="submit" value="Submit"/>
+                </form>
+                </div>
+                    <button onClick = {this.saveToLocalExampleData}>Saugoti pradinius duom</button>
+                    <button onClick = {this.saveToLocalCurrentData}>Saugoti esama data</button>
+                    <button onClick = {this.props.loadExampleData}>uzkrauti pradinius duom</button>
+                    <Scoreboard Items = {this.props.Items} AverageTime = {this.props.AverageTime} />                
+                </div>
         );  
     }
 }
