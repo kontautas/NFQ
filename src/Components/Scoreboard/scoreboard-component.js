@@ -14,8 +14,8 @@ const Scoreboard = (props) => {
             );
         }
     }
-    const renderScoreboardElement = (cssClass, number, specName, waitTime, renderButtons) => {
-        
+
+    const renderScoreboardElement = (cssClass, number, specName, waitTime, renderButtons) => {       
         return(
             <div className = {`col-sm ${cssClass}`} key = {number}>
                 <div className = 'row'>
@@ -31,6 +31,7 @@ const Scoreboard = (props) => {
             </div>
         )
     }
+
     const renderItem = (el) => {
         if(!el.Done){
             if(lastName !== el.SpecialistName){           
@@ -62,6 +63,7 @@ const Scoreboard = (props) => {
                 }
                                           
             }
+
             else if(props.clientNumber){
                 if(props.clientNumber === el.Number){
                     return(
@@ -69,6 +71,7 @@ const Scoreboard = (props) => {
                     ); 
                 }  
             }
+            
             else if(!props.specOnly && !props.clientNumber){
                 return(
                     renderScoreboardElement(cssClass, el.Number, el.SpecialistName, el.WaitTime, false)

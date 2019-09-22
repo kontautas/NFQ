@@ -38,4 +38,4 @@ class Specialists extends React.Component {
         );
     }
 }
-export default Specialists
+export default Specialists;

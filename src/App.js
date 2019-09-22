@@ -91,7 +91,7 @@ class App extends React.Component {
   }*/
   averageTimeObject = () => {
     let copy = [];
-    let lastName = ''
+    let lastName = '';
     JSON.parse(Clients).clients.sort(function(a, b){
       if(a.SpecialistName < b.SpecialistName) { return -1; }
       if(a.SpecialistName > b.SpecialistName) { return 1; }
@@ -126,7 +126,7 @@ class App extends React.Component {
       }
       return el;
     })
-    this.setState({items: copy})
+    this.setState({items: copy});
   }
   
   addNewClient = (name, number) => {
@@ -170,7 +170,7 @@ class App extends React.Component {
       this.uploadTimesToItems(); 
     }
     catch{
-      alert('Nepavyko nuskaityti lankytojų duomenų')
+      alert('Nepavyko nuskaityti lankytojų duomenų');
     }
    
   }

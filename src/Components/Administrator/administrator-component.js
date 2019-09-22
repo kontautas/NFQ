@@ -32,42 +32,47 @@ class admin extends React.Component{
     ChangeCurrentNumber = (event)=> {
         this.setState({Number: event.target.value});
     }
-    
+    checkBeforeSubmit = () => {
+        let bool = true;
+        this.props.Items.map(el => {
+            if(el.Number === this.state.Number){
+                bool = false;
+            }
+        });
+        if(this.state.SpecialistName !== '-----' && bool){
+            this.props.addNewClient(this.state.SpecialistName, this.state.Number);
+        }
+        else{
+            alert('Something went wrong, check the Specialist and Number');
+        }
+    }
     render(){
         return (
             <div className = 'container'>
                 <div className = 'row'>
-                    <form className = 'col-sm-2' onSubmit={this.state.SpecialistName !== '-----' ? ()=> this.props.addNewClient(this.state.SpecialistName, this.state.Number) : null}> 
+                    <form className = 'col-sm-2' onSubmit={() =>this.checkBeforeSubmit()}> 
                         <div className = 'row'>
                             <label className = 'col'>
                                 Pick specialist :                                                          
                             </label>
-                            <div className = 'dropdown'>
-                                
+                            <div className = 'dropdown'>                               
                                 <select className = 'btn btn-secondary btn-sm' value={this.state.SpecialistName} onChange={this.ChangeCurrentSpecName} autoFocus >
                                     <option className = 'dropdown-item changeColor' key = {0}>-----</option>
                                     {JSON.parse(Clients).clients.map(element =>
                                         <option className = 'dropdown-item changeColor' key = {element.Number} value = {element.SpecialistName}>{element.SpecialistName}</option>                    
                                     )}                            
                                 </select>
-                            </div>
-                            
-                            
-                            
+                            </div>                                                 
                             <label className = 'col'>
                                 Pick number :                             
                             </label>
-                            <input className = 'form-control form-control-sm' type='number' onChange = {this.ChangeCurrentNumber} ref={this.textInput}/>
-                            
+                            <input className = 'form-control form-control-sm' type='number' onChange = {this.ChangeCurrentNumber} ref={this.textInput}/>                           
                             <input type="submit" value="Submit"  className = 'btn btn-primary btn-sm col pls'/>
-                        </div>                   
-                        
+                        </div>                                           
                         <button className = 'btn btn-secondary pls' onClick = {this.saveToLocalExampleData}>Saugoti pradinius duom</button>
                         <button className = 'btn btn-secondary pls' onClick = {this.saveToLocalCurrentData}>Saugoti esama data</button>
                         <button className = 'btn btn-secondary pls' onClick = {this.props.loadExampleData}>Užkrauti pradinius duom</button>   
-
-                    </form>
-                   
+                    </form>                  
                     <Scoreboard Items = {this.props.Items} AverageTime = {this.props.AverageTime} /> 
                 </div>    
             </div> 
