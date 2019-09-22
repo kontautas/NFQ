@@ -21,17 +21,20 @@ const Scoreboard = (props) => {
                 <div className = 'row'>
                     <div className = 'col-sm text'>{specName}</div> 
                     <div className = 'col-sm text'>{number}</div>
-                    {
-                        renderButtons ?  renderButtonsElement(cssClass, number)
-                        :
-                        <div className = 'col-sm text'>{waitTime ? waitTime : 0} seconds</div>     
-                    }
-                    {
-                        renderCancel ? 
-                        <button className = 'btn btn-primary pls' onClick = {()=>props.cancelVisit(number)}>Cancel visit</button>
-                        :
-                        null
-                    }     
+                    <div className = 'col-sm text'>
+                        {
+                            renderButtons ?  renderButtonsElement(cssClass, number)
+                            :
+                            <div>{waitTime ? waitTime : 0} seconds</div>     
+                        }
+                        {
+                            renderCancel ? 
+                            <button className = 'btn btn-primary pls' onClick = {()=>props.cancelVisit(number)}>Cancel visit</button>
+                            :
+                            null
+                        }     
+                    </div>
+                    
                 </div>
                                                                                      
             </div>
@@ -86,7 +89,7 @@ const Scoreboard = (props) => {
         }
     }
     return(   
-        <div className = 'col-sm-8 scoreboard'>
+        <div className = 'col-sm-8 scoreboard '>
             <div className = 'col-sm'>
                 <div className = 'row startElements'>
                     <label className = 'col-sm text'>Specialistas</label>
