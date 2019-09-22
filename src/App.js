@@ -26,7 +26,6 @@ class App extends React.Component {
       }
       return el;
     })
-    console.log(copy);
     this.setState({items: copy});
   }
 

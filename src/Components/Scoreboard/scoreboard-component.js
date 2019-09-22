@@ -8,7 +8,7 @@ const Scoreboard = (props) => {
         if(cssclass === 'first'){
             return(
                 <div className = 'col-sm text'>
-                    <button className = 'btn btn-primary pls' onClick = {()=>props.customerDone(number)}>Pradėti laika</button>
+                    <button className = 'btn btn-primary pls' onClick = {()=>props.customerDone(number, true)}>Pradėti laika</button>
                     <button className = 'btn btn-primary pls' onClick = {()=>props.customerDone(number)}>Aptarnavau</button>
                 </div>
             );
@@ -39,7 +39,6 @@ const Scoreboard = (props) => {
     }
 
     const renderItem = (el) => {
-        console.log(el);
         if(!el.Done && !el.Canceled){
             if(lastName !== el.SpecialistName){           
                 cssClass = 'first';                          
