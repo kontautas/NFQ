@@ -24,7 +24,7 @@ class admin extends React.Component{
     }
     saveToLocalCurrentData = () => {
         localStorage.setItem('CurrentData', JSON.stringify(this.props.Items));
-        alert('Duomenys sėkmingai išsaugoti localstorage, key "CurrentData"');
+        alert('Data saved succesfully into localstorage, key "CurrentData"');
     }
     ChangeCurrentSpecName = (event) => {
         this.setState({SpecialistName: event.target.value});
@@ -44,7 +44,7 @@ class admin extends React.Component{
             this.props.addNewClient(this.state.SpecialistName, this.state.Number);
         }
         else{
-            alert('Something went wrong, check the Specialist and Number');
+            alert('Something went wrong! Check specialist name and number');
         }
     }
     render(){
