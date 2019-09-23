@@ -1,7 +1,6 @@
 import React from 'react';
 import Clients from './client-list-example';
 import Scoreboard from '../Scoreboard/scoreboard-component';
-import { Dirent } from 'fs';
 
 class admin extends React.Component{
 
@@ -20,11 +19,11 @@ class admin extends React.Component{
     }
     saveToLocalExampleData = () => {
         localStorage.setItem('ExampleData', Clients);
-        alert('Duomenys sėkmingai išsaugoti localstorage, key "ExampleData"');
+        alert('Data saved successfully into localstorage, key "ExampleData"');
     }
     saveToLocalCurrentData = () => {
         localStorage.setItem('CurrentData', JSON.stringify(this.props.Items));
-        alert('Data saved succesfully into localstorage, key "CurrentData"');
+        alert('Data saved successfully into localstorage, key "CurrentData"');
     }
     ChangeCurrentSpecName = (event) => {
         this.setState({SpecialistName: event.target.value});
@@ -39,6 +38,7 @@ class admin extends React.Component{
             if(el.Number === this.state.Number){
                 bool = false;
             }
+            return el;
         });
         if(this.state.SpecialistName !== '-----' && bool){
             this.props.addNewClient(this.state.SpecialistName, this.state.Number);

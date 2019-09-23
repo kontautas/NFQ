@@ -8,8 +8,8 @@ const Scoreboard = (props) => {
         if(cssclass === 'first'){
             return(
                 <div className = 'col-sm text'>
-                    <button className = 'btn btn-primary pls' onClick = {()=>props.customerDone(number, true)}>Pradėti laika</button>
-                    <button className = 'btn btn-primary pls' onClick = {()=>props.customerDone(number)}>Aptarnavau</button>
+                    <button className = 'btn btn-primary pls' onClick = {()=>props.customerDone(number, true)}>Start time</button>
+                    <button className = 'btn btn-primary pls' onClick = {()=>props.customerDone(number)}>End time</button>
                 </div>
             );
         }
@@ -92,9 +92,9 @@ const Scoreboard = (props) => {
         <div className = 'col-sm-8 scoreboard '>
             <div className = 'col-sm'>
                 <div className = 'row startElements'>
-                    <label className = 'col-sm text'>Specialistas</label>
-                    <label className = 'col-sm text'>Numeris</label>
-                    <label className = 'col-sm text'>Laikas laukti</label>
+                    <label className = 'col-sm text'>Specialist</label>
+                    <label className = 'col-sm text'>Number</label>
+                    <label className = 'col-sm text'>Wait time</label>
                 </div>    
             </div>
             {                       
