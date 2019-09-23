@@ -78,6 +78,11 @@ const Scoreboard = (props) => {
                     return(
                         renderScoreboardElement(cssClass, el.Number, el.SpecialistName, el.WaitTime, false, true)
                     ); 
+                }
+                else if(props.clientNumber === '0'){                   
+                    return(
+                        renderScoreboardElement(cssClass, el.Number, el.SpecialistName, el.WaitTime)
+                    ); 
                 }  
             }
 

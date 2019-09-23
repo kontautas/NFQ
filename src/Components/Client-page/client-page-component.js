@@ -17,6 +17,7 @@ class ClientPage extends React.Component {
         const number = JSON.stringify(this.state.currentNumber);
         localStorage.setItem('number', number);   
         setInterval(this.props.UpdateTime(), 5000);     
+        console.log('hey');
           
     }
     componentDidMount = () =>{
@@ -29,7 +30,10 @@ class ClientPage extends React.Component {
                 <div className = 'row'>
                     <div className = 'col-sm-2'>
                         <label>
-                            Įveskite savo skaičių
+                            Enter your number                            
+                        </label>
+                        <label>
+                            ('0' if you want to see all)
                         </label>
                         <input 
                             className = 'search'

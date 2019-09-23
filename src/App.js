@@ -8,6 +8,7 @@ import Clients from './Components/Administrator/client-list-example';
 import ClientPage from './Components/Client-page/client-page-component';
 import Header from './Components/Header/header-component';
 import firebase from './firebase';
+import { ELOOP } from 'constants';
 
 class App extends React.Component {
   constructor(){
@@ -66,14 +67,13 @@ class App extends React.Component {
   updateTimeToWait = () => {
     let copy = this.state.items;
     copy.map(el => {
-        if(el.WaitTime > 0){
-          el.WaitTime = Math.round(el.WaitTime - 5);
-        }
-        if(el.WaitTime < 0){
-          el.WaitTime = 0;
-        }
-        return el;
-                     
+      if(el.WaitTime > 0){
+        el.WaitTime = Math.round(el.WaitTime - 5);
+      }        
+      if(el.WaitTime < 0){
+        el.WaitTime = 0;
+      }
+      return el;                    
     })
     if(copy !== this.state.items){
         this.setState({items: copy});
